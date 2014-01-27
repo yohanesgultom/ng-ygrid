@@ -1,0 +1,99 @@
+<div id="grid-{{grid.id}}" class="grid">
+
+	<style type="text/css">
+		table.table tr.selected td {
+			background-color: #F5F1D3; 
+		}
+	</style>
+
+	<!-- table -->
+	<table class="table table-striped table-bordered"> 
+		<thead>
+			<tr>
+				<th ng-repeat="col in grid.cols | orderBy:'order'">{{col.display}}</th> 
+			</tr> 
+		</thead>
+		<tbody>
+			<tr id="row-{{row[grid.index]}}" class="grid-row" ng-repeat="row in grid.rows | orderBy: grid.orderBy" ng-class-odd="'odd'" ng-class-even="'even'" ng-click="selectRow(row)"> 
+				<td ng-repeat="col in grid.cols | orderBy:'order'">
+					<span ng-if="!col.options">{{row[col.key]}}</span>
+					<span ng-if="col.options">{{col.options[row[col.key]]}}</span>
+				</td> 
+			</tr> 
+		</tbody>
+	</table> 
+
+	<!-- toolbar -->
+	<div class="grid-toolbar">       
+		<div class="btn-group btn-group">
+          <button type="button" class="btn btn-default btn-add" ng-click="addRow()">Add</button>
+          <button type="button" class="btn btn-default btn-edit" ng-click="editRow()">Edit</button>
+          <button type="button" class="btn btn-default btn-delete" ng-click="deleteRow()">Delete</button>
+        </div>
+        <div class="pull-right">
+        	<ul class="pagination" style="margin:0">
+			  <li class="previous"><a href="#" ng-click="prevPage()">&laquo;</a></li>
+			  <li class="page" ng-repeat="n in getTimes(grid.totalPage) track by $index">
+			  	<a href="#" ng-click="openPage($index+1)">{{$index+1}}</a>
+			  </li>
+			  <li class="next"><a href="#" ng-click="nextPage()">&raquo;</a></li>
+			</ul>
+		</div>
+    </div>   
+
+    <!-- add modal -->
+	<div class="modal fade" id="grid-modal-add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">New {{ grid.id | uppercase}}</h4>
+				</div>	
+				<div class="modal-body">
+					<div class="form" role="form">
+						<div ng-repeat="col in grid.cols | orderBy:'order'" class="form-group">
+							<label for="{{col.key}}">{{col.display}}</label>
+							<input ng-if="!col.type || col.type == 'text'" id="{{col.key}}" type="text" class="input-sm form-control" ng-model="newRow[col.key]" />
+							<select ng-if="col.type == 'select'" id="{{col.key}}" class="input-sm form-control" ng-model="newRow[col.key]">
+								<option ng-repeat="(k,v) in col.options" value="{{k}}">{{v}}</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+					<button type="button" class="btn btn-primary" ng-click="saveRow()"><span class="glyphicon glyphicon-ok"></span> Add</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <!-- edit modal -->
+	<div class="modal fade" id="grid-modal-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Edit {{grid.id | uppercase}}</h4>
+				</div>	
+				<div class="modal-body">
+					<div class="form" role="form">
+						<div ng-repeat="col in grid.cols | orderBy:'order'" class="form-group">
+							<label for="{{col.key}}">{{col.display}}</label>
+							<input ng-if="!col.type || col.type == 'text'" id="{{col.key}}" type="text" class="input-sm form-control" ng-model="selectedRow[col.key]" />
+							<select ng-if="col.type == 'select'" id="{{col.key}}" class="input-sm form-control" ng-model="selectedRow[col.key]">
+								<option ng-repeat="(k,v) in col.options" value="{{k}}">{{v}}</option>
+							</select>
+							<!-- TODO support other type of input: radio, check, datepicker, file .etc -->							
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+					<button type="button" class="btn btn-primary" ng-click="saveRow()"><span class="glyphicon glyphicon-ok"></span> Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

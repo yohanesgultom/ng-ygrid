@@ -1,0 +1,24 @@
+<!--
+	Simple demo of using ng-ygrid
+-->
+<html ng-app="app">
+<head>
+	<title>Demo</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Depends on AngularJS, jQuery and Twitter Bootstrap -->
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">	
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>	
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
+	<!-- Main AngularJS module -->
+	<script src="app.js"></script>
+	<!-- Include ng-ygrid -->
+	<script src="ng-ygrid.directive.js"></script>	
+</head>
+<body ng-controller="SimpleController">	
+	<div class="container" style="margin-top: 10px">	
+		<!-- define ng-ygrid -->	
+		<ng-ygrid grid="grid1"></ng-ygrid>
+	</div>	
+</body>
+</html>
