@@ -33,7 +33,7 @@
         <div class="pull-right">
         	<ul class="pagination" style="margin:0">
 			  <li class="previous"><a href="#" ng-click="prevPage()">&laquo;</a></li>
-			  <li class="page" ng-repeat="n in getTimes(grid.totalPage) track by $index">
+			  <li class="page{{grid.page == ($index+1) && ' active ' || ''}}" ng-repeat="n in getTimes(grid.totalPage) track by $index">
 			  	<a href="#" ng-click="openPage($index+1)">{{$index+1}}</a>
 			  </li>
 			  <li class="next"><a href="#" ng-click="nextPage()">&raquo;</a></li>
