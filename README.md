@@ -1,7 +1,7 @@
 ng-ygrid
 ========
 
-Simple AngularJS directive of CRUD grid. Demo at [http://yohanesgultom.kd.io/ng-ygrid/](http://yohanesgultom.kd.io/ng-ygrid/)
+Simple AngularJS directive of CRUD grid. Check [demo here](http://crosscode.tk/ng-ygrid/)
 
 ## HTML
 
