@@ -110,8 +110,8 @@ Response:
 			{"id": "8", "name": "Customer8", "city": "jakarta"},
 			{"id": "9", "name": "Customer9", "city": "jakarta"},
 		],
-	"total":'.$n.',
-	"page":'.$page.'		
+	"total":20,
+	"page":1		
 }
 ```
 
